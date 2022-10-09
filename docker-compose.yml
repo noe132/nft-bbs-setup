@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  router:
+    image: dockerhub.qingcloud.com/pressone/nft-bbs-router:latest
+    ports:
+      - "${PORT:-35572}:80"
+    depends_on:
+      - server
+
+  server:
+    image: dockerhub.qingcloud.com/pressone/nft-bbs-server:latest
+    environment:
+      PORT: 80
+      db_host: postgres
+      db_port: 5432
+      db_user: postgres
+      db_password: e72a7e3456874163b3b715297be8a731
+      db_database: nft-bbs
+      # MIXIN_LOGIN: 'true' # enable mixin login
+      KEYSTORE_LOGIN: 'true' # enable keystore login
+      # CHECK_NFT='true' # check nft permission
+      # SEED_URL: # using a fixed seedUrl
+    depends_on:
+      - postgres
+
+  postgres:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: e72a7e3456874163b3b715297be8a731
+      POSTGRES_DB: nft-bbs
+    volumes:
+      - 'postgres-data:/var/lib/postgresql/data'
+
+volumes:
+  postgres-data:
