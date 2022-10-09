@@ -6,8 +6,8 @@
 ## 2. 获取代码
 
 ```
-git clone https://github.com/raimonfuns/light-timeline-setup.git
-cd light-timeline-setup
+git clone git@github.com:noe132/nft-bbs-setup.git
+cd nft-bbs-setup
 ```
 
 ## 3. 启动服务
@@ -15,7 +15,7 @@ cd light-timeline-setup
 ```sh
 # 使用指定端口
 export PORT=8888
-./deploy.sh
+./up.sh
 ```
 
 ## 4. 完成
